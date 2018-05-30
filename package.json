@@ -10,6 +10,9 @@
   },
   "author": "",
   "license": "ISC",
+  "repository": {
+    "github": "https://github.com/dashMrl/course_hunter"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",

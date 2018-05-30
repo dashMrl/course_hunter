@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  course_hunter:
+    image: course_hunter
+    build: 
+      context: .
+    user: "node"
+    labels:
+      - "Maintainer:xinliugm@gmail.com"
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - TZ=Asia/Shanghai
+    volumes: 
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 3000:3000
