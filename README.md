@@ -1,4 +1,5 @@
 # Course Hunter in nodejs
+Retrieving course arrangement from HUB in **ICS** / **CSV** / **JSON** ，you can import ICS/CSV file into your calendar application or use the JSON format data according to your wishes.
 
 ## Quick start
 Install necessary dependencies and serving on http://127.0.0.1:3000 : 
@@ -24,6 +25,9 @@ $ docker-compose up -d
 > Making sure docker-compose is installed
 > If your platform is macOS, comment the **volumes** config in docker-compose[.debug].yml
 
+## Examples
+![summary](./assets/summary.jpg) 
+![summary](./assets/detail.jpg) 
 
 ## TODOs
 - [x]  containerization with docker
