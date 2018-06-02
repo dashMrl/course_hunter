@@ -20,6 +20,7 @@ class Client {
                     if (err) {
                         reject(err)
                     } else {
+                        console.log(res.header)
                         resolve(res.text)
                     }
                 })
@@ -36,18 +37,19 @@ class Client {
                     })
                 .type('form')
                 .send(form)
-                .redirects(5)
+                .redirects(2333)
                 .end((err, res) => {
                     if (err || !res.ok) {
                         reject(err)
                     } else {
+                        console.log(res.header)
                         resolve(true)
                     }
                 })
         })
     }
 
-    async getCourses(rangeForm) {
+    getCourses(rangeForm) {
         return new Promise((resolve, reject) => {
             this.agent.post(courseUrl)
                 .set(
@@ -61,6 +63,7 @@ class Client {
                     if (err || !res.ok) {
                         reject(err)
                     } else {
+                        console.log(res.header)
                         resolve(res.text)
                     }
                 })

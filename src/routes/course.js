@@ -8,7 +8,7 @@ import uuid from "uuid";
 
 function formValidator(req, res, next) {
     const form = req.body
-    if (form.uname && form.pwd && form.start && form.end && form.ed) {
+    if (!form.uname || !form.pwd || !form.start || !form.end) {
         res.status(400).send('No enough args...').end()
     } else {
         const unamereg = /[U|M|D]20[1|2][0-9]{6}/
@@ -23,22 +23,23 @@ function formValidator(req, res, next) {
 const router = Router()
     .post('/ics', formValidator, async (req, res) => {
         const form = req.body
+        console.log(form)
         try {
-            const data = await hunter.huntIcs(form.uname, form.pwd, form.start, form.end, form.ed)
+            const data = await hunter.huntIcs(form.uname, form.pwd, form.start, form.end)
             const file = path.resolve('/tmp', uuid.v1())
             fs.writeFileSync(file, data)
             res.download(file, 'courses.ics')
+            fs.unlinkSync(file)
         } catch (error) {
             console.error(error)
             return res.sendStatus(400).end()
         } finally {
-            fs.unlinkSync(file)
         }
     })
     .post('/csv', formValidator, async (req, res) => {
         const form = req.body
         try {
-            const data = await hunter.huntCsv(form.uname, form.pwd, form.start, form.end, form.ed)
+            const data = await hunter.huntCsv(form.uname, form.pwd, form.start, form.end)
             const file = path.resolve('/tmp', uuid.v1())
             fs.writeFileSync(file, data)
             res.download(file, 'courses.csv')
@@ -50,7 +51,7 @@ const router = Router()
     .post('/json', formValidator, async (req, res) => {
         const form = req.body
         try {
-            const data = await hunter.huntJson(form.uname, form.pwd, form.start, form.end, form.ed)
+            const data = await hunter.huntJson(form.uname, form.pwd, form.start, form.end)
             res.json(data).end()
         } catch (error) {
             console.error(error)

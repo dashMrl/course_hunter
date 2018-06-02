@@ -30,5 +30,7 @@ $ docker-compose up -d
 ![summary](./assets/detail.jpg) 
 
 ## TODOs
-- [x]  containerization with docker
+- [x] containerization with docker
 - [ ] user friendly web interface
+- [ ] more detailed infomation,such as login failed or internal error
+- [ ] rewrite with TS
