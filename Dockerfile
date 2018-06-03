@@ -1,11 +1,13 @@
-FROM node:10.3.0-alpine
-
-COPY . /app/
+FROM node:10.3.0-alpine AS base
 WORKDIR /app
-RUN npm i && \
-    npm run build && \
-    npm uninstall @babel/core @babel/cli @babel/node @babel/preset-env babel-preset-minify --save-dev && \
-    npm cache clean --force && \
-    rm -r src 
+COPY . .
+RUN npm i --only=production && npm cache clean --force
+
+FROM base AS builder
+RUN npm i --only=development
+RUN npm run build
+
+FROM base
+COPY --from=builder /app/dist ./dist
 CMD [ "dist/index.js" ]
 ENTRYPOINT [ "node" ]
