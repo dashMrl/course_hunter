@@ -2,7 +2,6 @@ version: '3'
 
 services:
   course_hunter:
-    image: course_hunter
     build: 
       context: .
     user: "node"

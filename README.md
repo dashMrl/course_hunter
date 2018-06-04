@@ -22,7 +22,8 @@ It's recommended to run the service in a docker container:
 $ docker-compose up -d
 ```
 
-> Making sure docker-compose is installed
+> Making sure docker-compose is installed.
+>
 > If your platform is macOS, comment the **volumes** config in docker-compose[.debug].yml
 
 ## Examples

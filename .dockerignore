@@ -7,7 +7,8 @@ node_modules/
 npm-debug.log
 .gitignore
 .dockerignore
-Dockerfile*
 docker-compose*
+Dockerfile*
+nginx.conf
 README.md
 LICENSE

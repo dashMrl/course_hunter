@@ -1,9 +1,10 @@
 FROM node:10.3.0-alpine AS base
 WORKDIR /app
-COPY . .
+COPY package*.json ./
 RUN npm i --only=production && npm cache clean --force
 
 FROM base AS builder
+COPY . .
 RUN npm i --only=development
 RUN npm run build
 
