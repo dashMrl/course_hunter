@@ -21,7 +21,7 @@ function formValidator(req, res, next) {
     }
 }
 const router = Router()
-    .post('/ics', formValidator, async (req, res, next) => {
+    .post('/ics', formValidator, async (req, res) => {
         const form = req.body
         console.log(form)
         try {
@@ -38,10 +38,10 @@ const router = Router()
                 return res.sendStatus(500).end()
             }
         } finally {
-            next()
+
         }
     })
-    .post('/csv', formValidator, async (req, res, next) => {
+    .post('/csv', formValidator, async (req, res) => {
         const form = req.body
         try {
             const data = await hunter.huntCsv(form.uname, form.pwd, form.start, form.end)
@@ -56,10 +56,10 @@ const router = Router()
                 return res.sendStatus(500).end()
             }
         } finally {
-            next()
+
         }
     })
-    .post('/json', formValidator, async (req, res, next) => {
+    .post('/json', formValidator, async (req, res) => {
         const form = req.body
         try {
             const data = await hunter.huntJson(form.uname, form.pwd, form.start, form.end)
@@ -72,7 +72,7 @@ const router = Router()
                 return res.sendStatus(500).end()
             }
         } finally {
-            next()
+
         }
     })
 
