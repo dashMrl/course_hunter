@@ -23,13 +23,11 @@ function formValidator(req, res, next) {
 const router = Router()
     .post('/ics', formValidator, async (req, res) => {
         const form = req.body
-        console.log(form)
         try {
             const data = await hunter.huntIcs(form.uname, form.pwd, form.start, form.end)
             const file = path.resolve('/tmp', uuid.v1())
             fs.writeFileSync(file, data)
             res.download(file, 'courses.ics')
-            fs.unlinkSync(file)
         } catch (error) {
             console.error(error)
             if (error instanceof SyntaxError) {
