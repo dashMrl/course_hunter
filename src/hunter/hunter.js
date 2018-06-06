@@ -10,8 +10,6 @@ async function hunt(uname, pwd, start, end, encrypted) {
     const en = new encrypt.Encryptor()
     form.username = encrypted ? uname : en.encrypt(uname)
     form.password = encrypted ? pwd : en.encrypt(pwd)
-    console.log(encrypted)
-    console.log(form)
     await client.login(form)
 
     const courses = await client.getCourses({ start: start, end: end })

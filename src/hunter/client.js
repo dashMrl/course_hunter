@@ -20,7 +20,6 @@ class Client {
                     if (err) {
                         reject(err)
                     } else {
-                        console.log(res.header)
                         resolve(res.text)
                     }
                 })
@@ -37,12 +36,11 @@ class Client {
                     })
                 .type('form')
                 .send(form)
-                .redirects(2333)
+                .redirects(2)
                 .end((err, res) => {
                     if (err || !res.ok) {
                         reject(err)
                     } else {
-                        console.log(res.header)
                         resolve(true)
                     }
                 })
@@ -63,7 +61,6 @@ class Client {
                     if (err || !res.ok) {
                         reject(err)
                     } else {
-                        console.log(res.header)
                         resolve(res.text)
                     }
                 })

@@ -21,7 +21,7 @@ function formValidator(req, res, next) {
     }
 }
 const router = Router()
-    .post('/ics', formValidator, async (req, res) => {
+    .post('/ics', formValidator, async (req, res, next) => {
         const form = req.body
         console.log(form)
         try {
@@ -32,11 +32,16 @@ const router = Router()
             fs.unlinkSync(file)
         } catch (error) {
             console.error(error)
-            return res.sendStatus(400).end()
+            if (error instanceof SyntaxError) {
+                return res.sendStatus(400).end()
+            } else {
+                return res.sendStatus(500).end()
+            }
         } finally {
+            next()
         }
     })
-    .post('/csv', formValidator, async (req, res) => {
+    .post('/csv', formValidator, async (req, res, next) => {
         const form = req.body
         try {
             const data = await hunter.huntCsv(form.uname, form.pwd, form.start, form.end)
@@ -44,18 +49,30 @@ const router = Router()
             fs.writeFileSync(file, data)
             res.download(file, 'courses.csv')
         } catch (error) {
-            console.error(error)
-            return res.sendStatus(400).end()
+            if (error instanceof SyntaxError) {
+                console.error(error.message)
+                return res.sendStatus(400).end()
+            } else {
+                return res.sendStatus(500).end()
+            }
+        } finally {
+            next()
         }
     })
-    .post('/json', formValidator, async (req, res) => {
+    .post('/json', formValidator, async (req, res, next) => {
         const form = req.body
         try {
             const data = await hunter.huntJson(form.uname, form.pwd, form.start, form.end)
             res.json(data).end()
         } catch (error) {
             console.error(error)
-            return res.sendStatus(400).end()
+            if (error instanceof SyntaxError) {
+                return res.sendStatus(400).end()
+            } else {
+                return res.sendStatus(500).end()
+            }
+        } finally {
+            next()
         }
     })
 
