@@ -13,5 +13,7 @@ services:
       - TZ=Asia/Shanghai
     volumes: 
       - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /usr/share/zoneinfo:/usr/share/zoneinfo:ro
     ports:
       - 3000:3000

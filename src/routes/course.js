@@ -1,9 +1,7 @@
 import { Router } from "express";
 import * as hunter from "../hunter/hunter";
-import { formats } from '../hunter/parser'
 import path from "path";
 import fs from "fs";
-import os from "os";
 import uuid from "uuid";
 
 function formValidator(req, res, next) {

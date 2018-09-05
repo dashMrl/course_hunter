@@ -32,6 +32,6 @@ $ docker-compose up -d
 
 ## TODOs
 - [x] containerization with docker
-- [ ] user friendly web interface
+- [x] user friendly [GUI](https://github.com/dashMrl/course_hunter)  
 - [ ] more detailed infomation,such as login failed or internal error
 - [ ] rewrite with TS
