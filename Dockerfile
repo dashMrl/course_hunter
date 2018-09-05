@@ -5,10 +5,11 @@ RUN npm i --only=production && npm cache clean --force
 
 FROM base AS builder
 COPY . .
-RUN npm i --only=development
-RUN npm run build
+RUN npm i --only=development && \
+    npm run build
 
 FROM base
 COPY --from=builder /app/dist ./dist
+RUN echo "Asia/Shanghai" > /etc/timezone
 CMD [ "dist/index.js" ]
 ENTRYPOINT [ "node" ]
